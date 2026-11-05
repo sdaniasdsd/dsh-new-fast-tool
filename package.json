@@ -1,0 +1,45 @@
+{
+  "name": "dsh-task-runtime",
+  "version": "0.1.0",
+  "description": "Model-selected installed plugins in isolated DSH Web task runtimes",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "bin": {
+    "dsh-task-runtime": "./src/cli.mjs"
+  },
+  "exports": {
+    ".": "./src/host.mjs",
+    "./worker": "./src/worker.mjs",
+    "./client": "./src/client.js"
+  },
+  "files": [
+    "src",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "test:installed": "node test/installed-smoke.mjs",
+    "prepare:runtime": "node src/cli.mjs prepare",
+    "start": "node src/cli.mjs start",
+    "check": "node src/cli.mjs check"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}
